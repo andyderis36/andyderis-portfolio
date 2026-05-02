@@ -1,0 +1,104 @@
+{
+  "entities": {
+    "Profile": {
+      "title": "Profile",
+      "description": "User profile data",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "jobTitle": { "type": "string" },
+        "bio1": { "type": "string" },
+        "bio2": { "type": "string" },
+        "email": { "type": "string" },
+        "github": { "type": "string" },
+        "linkedin": { "type": "string" },
+        "instagram": { "type": "string" },
+        "location": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Portfolio project item",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "desc": { "type": "string" },
+        "stack": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "link": { "type": "string" },
+        "order": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "Experience": {
+      "title": "Experience",
+      "description": "Work experience item",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string" },
+        "company": { "type": "string" },
+        "date": { "type": "string" },
+        "location": { "type": "string" },
+        "tasks": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "order": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "Education": {
+      "title": "Education",
+      "description": "Education background item",
+      "type": "object",
+      "properties": {
+        "institution": { "type": "string" },
+        "degree": { "type": "string" },
+        "date": { "type": "string" },
+        "location": { "type": "string" },
+        "description": { "type": "string" },
+        "order": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "SiteSettings": {
+      "title": "Site Settings",
+      "description": "Global website settings",
+      "type": "object",
+      "properties": {
+        "navLogo": { "type": "string" },
+        "footerText": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/profile/{profileId}": {
+      "schema": { "$ref": "#/entities/Profile" },
+      "description": "Stores site-wide profile data. ID is usually 'main'."
+    },
+    "/settings/{settingsId}": {
+      "schema": { "$ref": "#/entities/SiteSettings" },
+      "description": "Stores site settings like logo, nav, footer strings. ID is usually 'main'."
+    },
+    "/projects/{projectId}": {
+      "schema": { "$ref": "#/entities/Project" },
+      "description": "Stores portfolio projects."
+    },
+    "/experiences/{experienceId}": {
+      "schema": { "$ref": "#/entities/Experience" },
+      "description": "Stores work experiences."
+    },
+    "/educations/{educationId}": {
+      "schema": { "$ref": "#/entities/Education" },
+      "description": "Stores education entries."
+    }
+  }
+}
