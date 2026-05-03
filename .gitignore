@@ -8,3 +8,9 @@ coverage/
 .env*
 !.env.example
 firebase-applet-config.json
+.agents
+.firebaserc
+.firebase/
+skills-lock.json
+firebase.json
+

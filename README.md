@@ -29,23 +29,28 @@ A modern portfolio website built with React, TypeScript, Vite, and Tailwind CSS,
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd andyderis-portfolio
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables:
+
 ```bash
 cp .env.example .env.local
 ```
+
 Edit `.env.local` with your Firebase and Google GenAI credentials.
 
 4. Start the development server:
+
 ```bash
 npm run dev
 ```
