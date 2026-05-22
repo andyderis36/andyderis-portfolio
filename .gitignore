@@ -1,16 +1,41 @@
+# Dependencies
 node_modules/
+
+# IDEs and Editors
 .vscode/
+.idea/
+
+# Production/Build
 build/
 dist/
-coverage/
-.DS_Store
+dist-ssr/
+*.local
+
+# Logs and debug
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Environment variables
 .env*
 !.env.example
-firebase-applet-config.json
-.agents
-.firebaserc
-.firebase/
-skills-lock.json
-firebase.json
 
+# Firebase
+.firebase/
+# Note: we TRACK firebase.json, .firebaserc, and firebase-applet-config.json
+# for the GitHub Actions build and deployment to work.
+
+# Secrets / Service Accounts
+*-credentials.json
+*-key.json
+apas-portfolio-*.json
+
+# Agent specific
+.agents/
+.sisyphus/
+skills-lock.json

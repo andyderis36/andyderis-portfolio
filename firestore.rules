@@ -22,8 +22,8 @@ service cloud.firestore {
 
     // --- VALIDATION HELPERS ---
     function isValidProfile(data) {
-      return data.keys().hasAll(['name', 'jobTitle', 'bio1', 'bio2', 'email', 'github', 'linkedin', 'instagram', 'location', 'updatedAt', 'statusText', 'technicalArsenal']) &&
-             data.keys().size() == 12 &&
+      return data.keys().hasAll(['name', 'jobTitle', 'bio1', 'bio2', 'email', 'github', 'linkedin', 'instagram', 'location', 'updatedAt', 'statusText', 'technicalArsenal', 'contactTitle', 'contactText']) &&
+             data.keys().size() == 14 &&
              data.name is string && data.name.size() <= 100 &&
              data.jobTitle is string && data.jobTitle.size() <= 100 &&
              data.bio1 is string && data.bio1.size() <= 2000 &&
@@ -34,6 +34,8 @@ service cloud.firestore {
              data.instagram is string && data.instagram.size() <= 200 &&
              data.location is string && data.location.size() <= 200 &&
              data.statusText is string && data.statusText.size() <= 200 &&
+             data.contactTitle is string && data.contactTitle.size() <= 200 &&
+             data.contactText is string && data.contactText.size() <= 2000 &&
              data.technicalArsenal is list &&
              data.updatedAt is timestamp;
     }
@@ -110,7 +112,7 @@ service cloud.firestore {
       
       allow update: if isAdmin() && isValidId(profileId) && isValidProfile(incoming()) && (
         incoming().diff(existing()).affectedKeys().hasOnly([
-          'name', 'jobTitle', 'bio1', 'bio2', 'email', 'github', 'linkedin', 'instagram', 'location', 'updatedAt', 'statusText', 'technicalArsenal'
+          'name', 'jobTitle', 'bio1', 'bio2', 'email', 'github', 'linkedin', 'instagram', 'location', 'updatedAt', 'statusText', 'technicalArsenal', 'contactTitle', 'contactText'
         ])
       );
       
