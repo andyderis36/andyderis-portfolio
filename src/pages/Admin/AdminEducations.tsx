@@ -92,7 +92,7 @@ export default function AdminEducations() {
         </div>
       )}
 
-      <div className="bg-[#0e0e11] border border-zinc-800 rounded p-6 mb-8">
+      <div className="bg-[#0e0e11] border border-zinc-800 rounded p-4 sm:p-6 mb-8">
         <h3 className="text-lg font-medium text-zinc-200 mb-4">{editingId ? 'Edit Education' : 'Add New Education'}</h3>
         <form onSubmit={handleSave} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -122,28 +122,30 @@ export default function AdminEducations() {
       {loading ? <p className="text-zinc-500">Loading...</p> : (
         <div className="space-y-4">
           {educations.map(edu => (
-            <div key={edu.id} className="bg-[#0e0e11] border border-zinc-800 rounded p-4 flex justify-between items-start">
-              <div>
-                <h4 className="font-bold text-zinc-200">{edu.institution} <span className="text-xs text-zinc-600 font-mono">(Order: {edu.order})</span></h4>
-                <div className="text-zinc-400 text-sm mt-1">{edu.degree}</div>
-                <div className="flex gap-2 text-xs text-zinc-500 mt-1 mb-2 font-mono">
-                  <span>{edu.date}</span> • <span>{edu.location}</span>
+            <div key={edu.id} className="bg-[#0e0e11] border border-zinc-800 rounded-lg p-4 md:p-6 flex flex-col sm:flex-row justify-between items-start gap-4">
+              <div className="flex-1">
+                <h4 className="font-bold text-zinc-200 text-lg">{edu.institution} <span className="text-xs text-zinc-600 font-mono block sm:inline-block sm:ml-2">(Order: {edu.order})</span></h4>
+                <div className="text-zinc-300 font-medium text-sm mt-1">{edu.degree}</div>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-zinc-500 mt-2 mb-3 font-mono">
+                  <span>{edu.date}</span>
+                  <span className="hidden sm:inline text-zinc-800">•</span>
+                  <span>{edu.location}</span>
                 </div>
-                <p className="text-sm text-zinc-400 mt-2 font-light">
+                <p className="text-sm text-zinc-400 mt-2 font-light leading-relaxed">
                   {edu.description}
                 </p>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 self-end sm:self-start shrink-0">
                 {confirmDelete === edu.id ? (
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-zinc-400">Sure?</span>
-                    <button onClick={() => handleDelete(edu.id)} className="bg-red-900/40 text-red-400 px-3 py-1 rounded text-xs hover:bg-red-900/60">Yes</button>
-                    <button onClick={() => setConfirmDelete(null)} className="border border-zinc-800 text-zinc-400 px-3 py-1 rounded text-xs hover:bg-zinc-800">No</button>
+                  <div className="flex items-center gap-2 bg-red-950/20 p-1 rounded-lg border border-red-900/30">
+                    <span className="text-xs text-red-400 px-2 font-medium">Delete?</span>
+                    <button onClick={() => handleDelete(edu.id)} className="bg-red-500 text-white px-3 py-1.5 rounded-md text-xs font-bold hover:bg-red-600 transition-colors">Yes</button>
+                    <button onClick={() => setConfirmDelete(null)} className="bg-zinc-800 text-zinc-300 px-3 py-1.5 rounded-md text-xs font-medium hover:bg-zinc-700 transition-colors">No</button>
                   </div>
                 ) : (
                   <>
-                    <button onClick={() => handleEdit(edu)} className="p-2 text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800 rounded"><Edit2 size={16} /></button>
-                    <button onClick={() => setConfirmDelete(edu.id)} className="p-2 text-red-500 hover:text-red-400 hover:bg-red-950/30 rounded"><Trash2 size={16} /></button>
+                    <button onClick={() => handleEdit(edu)} className="p-2.5 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 rounded-lg transition-all" title="Edit"><Edit2 size={18} /></button>
+                    <button onClick={() => setConfirmDelete(edu.id)} className="p-2.5 text-zinc-500 hover:text-red-400 hover:bg-red-950/30 rounded-lg transition-all" title="Delete"><Trash2 size={18} /></button>
                   </>
                 )}
               </div>

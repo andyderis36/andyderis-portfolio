@@ -92,7 +92,7 @@ export default function AdminProjects() {
         </div>
       )}
 
-      <div className="bg-[#0e0e11] border border-zinc-800 rounded p-6 mb-8">
+      <div className="bg-[#0e0e11] border border-zinc-800 rounded p-4 sm:p-6 mb-8">
         <h3 className="text-lg font-medium text-zinc-200 mb-4">{editingId ? 'Edit Project' : 'Add New Project'}</h3>
         <form onSubmit={handleSave} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -120,25 +120,25 @@ export default function AdminProjects() {
       {loading ? <p className="text-zinc-500">Loading...</p> : (
         <div className="space-y-4">
           {projects.map(proj => (
-            <div key={proj.id} className="bg-[#0e0e11] border border-zinc-800 rounded p-4 flex justify-between items-start">
-              <div>
-                <h4 className="font-bold text-zinc-200">{proj.title} <span className="text-xs text-zinc-600 font-mono">(Order: {proj.order})</span></h4>
+            <div key={proj.id} className="bg-[#0e0e11] border border-zinc-800 rounded-lg p-4 md:p-6 flex flex-col sm:flex-row justify-between items-start gap-4">
+              <div className="flex-1">
+                <h4 className="font-bold text-zinc-200 text-lg">{proj.title} <span className="text-xs text-zinc-600 font-mono block sm:inline-block sm:ml-2">(Order: {proj.order})</span></h4>
                 <p className="text-sm text-zinc-400 mt-1">{proj.subtitle}</p>
-                <div className="flex gap-2 mt-2">
-                  {proj.stack.map((s: string) => <span key={s} className="bg-zinc-900 text-xs text-zinc-500 px-2 py-1 rounded">{s}</span>)}
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {proj.stack.map((s: string) => <span key={s} className="bg-zinc-900 border border-zinc-800 text-xs text-zinc-500 px-2.5 py-1 rounded-md">{s}</span>)}
                 </div>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 self-end sm:self-start shrink-0">
                 {confirmDelete === proj.id ? (
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-zinc-400">Sure?</span>
-                    <button onClick={() => handleDelete(proj.id)} className="bg-red-900/40 text-red-400 px-3 py-1 rounded text-xs hover:bg-red-900/60">Yes</button>
-                    <button onClick={() => setConfirmDelete(null)} className="border border-zinc-800 text-zinc-400 px-3 py-1 rounded text-xs hover:bg-zinc-800">No</button>
+                  <div className="flex items-center gap-2 bg-red-950/20 p-1 rounded-lg border border-red-900/30">
+                    <span className="text-xs text-red-400 px-2 font-medium">Delete?</span>
+                    <button onClick={() => handleDelete(proj.id)} className="bg-red-500 text-white px-3 py-1.5 rounded-md text-xs font-bold hover:bg-red-600 transition-colors">Yes</button>
+                    <button onClick={() => setConfirmDelete(null)} className="bg-zinc-800 text-zinc-300 px-3 py-1.5 rounded-md text-xs font-medium hover:bg-zinc-700 transition-colors">No</button>
                   </div>
                 ) : (
                   <>
-                    <button onClick={() => handleEdit(proj)} className="p-2 text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800 rounded"><Edit2 size={16} /></button>
-                    <button onClick={() => setConfirmDelete(proj.id)} className="p-2 text-red-500 hover:text-red-400 hover:bg-red-950/30 rounded"><Trash2 size={16} /></button>
+                    <button onClick={() => handleEdit(proj)} className="p-2.5 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 rounded-lg transition-all" title="Edit"><Edit2 size={18} /></button>
+                    <button onClick={() => setConfirmDelete(proj.id)} className="p-2.5 text-zinc-500 hover:text-red-400 hover:bg-red-950/30 rounded-lg transition-all" title="Delete"><Trash2 size={18} /></button>
                   </>
                 )}
               </div>

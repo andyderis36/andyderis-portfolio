@@ -53,27 +53,52 @@ export default function AdminSettings() {
   if (loading) return <div className="animate-pulse flex space-x-4"><div className="flex-1 space-y-6 py-1"><div className="h-2 bg-zinc-700 rounded"></div></div></div>;
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold text-zinc-100 mb-6">Site Settings</h2>
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-2xl font-bold text-zinc-100">Site Settings</h2>
+        <p className="text-sm text-zinc-500 mt-1">Configure global website branding and footer information.</p>
+      </div>
+
       {status.message && (
-        <div className={`p-4 mb-6 rounded ${status.type === 'success' ? 'bg-green-900/30 border border-green-800 text-green-300' : 'bg-red-900/30 border border-red-800 text-red-300'}`}>
+        <div className={`p-4 rounded-lg flex items-center gap-3 ${status.type === 'success' ? 'bg-green-900/30 border border-green-800 text-green-300' : 'bg-red-900/30 border border-red-800 text-red-300'}`}>
           {status.message}
         </div>
       )}
-      <form onSubmit={handleSave} className="space-y-6">
+
+      <form onSubmit={handleSave} className="space-y-6 max-w-2xl">
         <div className="grid grid-cols-1 gap-6">
-          <div>
-            <label className="block text-sm font-medium text-zinc-400 mb-1">Nav Logo / Text</label>
-            <input type="text" name="navLogo" value={formData.navLogo} onChange={handleChange} required className="w-full bg-[#0e0e11] border border-zinc-800 rounded px-4 py-2 text-zinc-300 focus:outline-none focus:border-zinc-500" />
+          <div className="group">
+            <label className="block text-sm font-medium text-zinc-400 mb-2 group-focus-within:text-zinc-200 transition-colors">Nav Logo / Text</label>
+            <input 
+              type="text" 
+              name="navLogo" 
+              value={formData.navLogo} 
+              onChange={handleChange} 
+              required 
+              className="w-full bg-[#0e0e11] border border-zinc-800 rounded-lg px-4 py-3 text-zinc-300 focus:outline-none focus:border-zinc-500 focus:bg-[#16161a] transition-all" 
+              placeholder="e.g. MYLOGO."
+            />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-zinc-400 mb-1">Footer Custom Text</label>
-            <input type="text" name="footerText" value={formData.footerText} onChange={handleChange} required className="w-full bg-[#0e0e11] border border-zinc-800 rounded px-4 py-2 text-zinc-300 focus:outline-none focus:border-zinc-500" />
+          <div className="group">
+            <label className="block text-sm font-medium text-zinc-400 mb-2 group-focus-within:text-zinc-200 transition-colors">Footer Custom Text</label>
+            <input 
+              type="text" 
+              name="footerText" 
+              value={formData.footerText} 
+              onChange={handleChange} 
+              required 
+              className="w-full bg-[#0e0e11] border border-zinc-800 rounded-lg px-4 py-3 text-zinc-300 focus:outline-none focus:border-zinc-500 focus:bg-[#16161a] transition-all" 
+              placeholder="e.g. Built with Love"
+            />
           </div>
         </div>
 
-        <button type="submit" disabled={saving} className="bg-zinc-100 text-zinc-900 px-6 py-2 rounded text-sm font-medium hover:bg-zinc-300 transition-colors disabled:opacity-50">
-          {saving ? 'Saving...' : 'Save Settings'}
+        <button 
+          type="submit" 
+          disabled={saving} 
+          className="w-full sm:w-auto bg-zinc-100 text-zinc-900 px-8 py-3 rounded-lg text-sm font-bold hover:bg-zinc-300 transition-all disabled:opacity-50 active:scale-95 shadow-lg shadow-black/20"
+        >
+          {saving ? 'Saving Settings...' : 'Save Settings'}
         </button>
       </form>
     </div>
